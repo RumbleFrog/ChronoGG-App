@@ -1,6 +1,6 @@
 <template>
   <div>
-      Test
+      <span class="tag is-primary"></span>
   </div>
 </template>
 

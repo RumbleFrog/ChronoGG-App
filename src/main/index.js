@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, Menu, Tray } from 'electron' // eslint-disable-line
+import path from 'path';
 
 /**
  * Set `__static` path to static files in production
@@ -42,6 +43,22 @@ function createWindow() {
 
     return false;
   });
+
+  const appIcon = new Tray(path.join(__static, 'logo.png'));
+
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Show App',
+      click() {
+        mainWindow.show();
+      } },
+    { label: 'Quit',
+      click() {
+        app.isQuiting = true;
+        app.quit();
+      } },
+  ]);
+
+  appIcon.setContextMenu(contextMenu);
 }
 
 app.on('ready', createWindow);
