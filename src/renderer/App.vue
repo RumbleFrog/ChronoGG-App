@@ -6,8 +6,8 @@
 
 <script>
   export default {
-    name: 'chronogg-app'
-  }
+    name: 'chronogg-app',
+  };
 </script>
 
 <style>
