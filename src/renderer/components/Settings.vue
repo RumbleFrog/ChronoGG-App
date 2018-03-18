@@ -1,10 +1,16 @@
 <template>
-  <div class="column is-4 is-offset-one-third">
+  <div class="column is-half is-offset-5">
     <b-field>
-      <b-timepicker rounded placeholder="Select a convenient time..." icon="clock" hour-format="24" v-model="time" :loading="loading"></b-timepicker>
+      <b-switch value="true" type="is-info" size="is-medium" :disabled="loading">⏰ Daily Deal</b-switch>
     </b-field>
     <b-field>
-      <button class="button is-rounded chrono-button" :class="{'is-loading': loading}">Save Setting</button>
+      <b-switch value="true" type="is-success" size="is-medium" :disabled="loading">🏬 Store Restock</b-switch>
+    </b-field>
+    <b-field>
+      <button class="button is-rounded chrono-button" :class="{'is-loading': loading}">
+        <b-icon pack="far" icon="save"></b-icon>
+        <span>Save Settings</span>
+      </button>
     </b-field>
   </div>
 </template>

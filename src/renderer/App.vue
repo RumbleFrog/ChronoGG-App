@@ -17,7 +17,7 @@
             <div class="navbar-menu" :class="{'is-active': navMenuActive}">
               <div class="navbar-end">
                 <router-link :to="{ name: 'Settings', params: {} }" class="navbar-item">
-                  <b-icon icon="wrench"></b-icon>&nbsp;<span>Settings</span>
+                  <b-icon icon="cog" custom-class="fa-spin"></b-icon>&nbsp;<span>Settings</span>
                 </router-link>
               </div>
             </div>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="hero-body pattern-bg">
-        <div class="container has-text-centered">
+        <div class="container">
           <router-view></router-view>
         </div>
       </div>
