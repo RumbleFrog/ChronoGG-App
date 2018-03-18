@@ -60,3 +60,5 @@ Sale.run = function () {
         })
     })
 }
+
+export default Sale;
