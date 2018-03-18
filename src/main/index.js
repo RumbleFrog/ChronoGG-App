@@ -2,6 +2,7 @@ import { app, BrowserWindow, Menu, Tray } from 'electron' // eslint-disable-line
 import AutoLaunch from 'auto-launch';
 import Storage from 'electron-json-storage';
 import log from 'electron-log';
+import isDev from 'electron-is-dev';
 import path from 'path';
 
 log.transports.file.level = 'info';
@@ -73,6 +74,8 @@ app.on('ready', () => {
 
   log.info(`${app.getName()} ready!`);
 
+  log.info(`Executable path: ${app.getPath('exe')}`);
+
   Storage.get('preference', (err, data) => {
     if (err) log.error(err);
     else if (!Object.prototype.hasOwnProperty.call(data, 'daily') || !Object.prototype.hasOwnProperty.call(data, 'restock')) {
@@ -99,11 +102,13 @@ app.on('activate', () => {
   }
 });
 
-new AutoLaunch({
-  name: 'ChronoGG App',
-  path: app.getPath('exe'),
-  isHidden: true,
-}).enable();
+if (!isDev) {
+  new AutoLaunch({
+    name: 'ChronoGG App',
+    path: app.getPath('exe'),
+    isHidden: true,
+  }).enable();
+}
 
 /**
  * Auto Updater
