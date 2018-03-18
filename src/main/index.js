@@ -5,7 +5,6 @@ import log from 'electron-log';
 import path from 'path';
 
 log.transports.file.level = 'info';
-log.transports.file.file = `${__dirname}chronogg.log`;
 
 /**
  * Set `__static` path to static files in production
@@ -71,6 +70,21 @@ function createWindow() {
 
 app.on('ready', () => {
   createWindow();
+
+  log.info(`${app.getName()} ready!`);
+
+  Storage.get('preference', (err, data) => {
+    if (err) log.error(err);
+    else if (!Object.prototype.hasOwnProperty.call(data, 'daily') || !Object.prototype.hasOwnProperty.call(data, 'restock')) {
+      log.info('Populated preference file');
+      Storage.set('preference', {
+        daily: true,
+        restock: true,
+      }, (err) => {
+        if (err) log.error(err);
+      });
+    }
+  });
 });
 
 app.on('window-all-closed', () => {

@@ -1,6 +1,6 @@
 {
   "name": "chronogg-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "RumbleFrog <xxlosttechxx@gmail.com>",
   "description": "ChronoGG App",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "chronogg-app",
+    "productName": "ChronoGG App",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"

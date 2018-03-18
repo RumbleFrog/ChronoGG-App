@@ -1,13 +1,13 @@
 <template>
   <div class="column is-half is-offset-5">
     <b-field>
-      <b-switch value="true" type="is-info" size="is-medium" :disabled="loading">⏰ Daily Deal</b-switch>
+      <b-switch v-model="daily" type="is-info" size="is-medium" :disabled="loading">⏰ Daily Deal</b-switch>
     </b-field>
     <b-field>
-      <b-switch value="true" type="is-success" size="is-medium" :disabled="loading">🏬 Store Restock</b-switch>
+      <b-switch v-model="restock" type="is-success" size="is-medium" :disabled="loading">🏬 Store Restock</b-switch>
     </b-field>
     <b-field>
-      <button class="button is-rounded chrono-button" :class="{'is-loading': loading}">
+      <button class="button is-rounded chrono-button" :class="{'is-loading': loading}" @click="updateSetting()">
         <b-icon pack="far" icon="save"></b-icon>
         <span>Save Settings</span>
       </button>
@@ -16,18 +16,51 @@
 </template>
 
 <script>
-// import storage from 'electron-json-storage';
+import Storage from 'electron-json-storage';
 
 export default {
   name: 'Settings',
   data() {
     return {
-      loading: false,
-      time: null,
+      loading: true,
+      daily: null,
+      restock: null,
     };
   },
+  methods: {
+    updateSetting() {
+      Storage.set('preference', {
+        daily: this.daily,
+        restock: this.restock,
+      }, (err) => {
+        if (err) {
+          this.$toast.open({
+            message: `Unable to save preferences 😓: ${err}`,
+            type: 'is-danger',
+          });
+        } else {
+          this.$toast.open({
+            message: 'Successfully saved your preferences 😄',
+            type: 'is-success',
+          });
+        }
+      });
+    },
+  },
   mounted() {
+    Storage.get('preference', (err, data) => {
+      if (err) {
+        this.$toast.open({
+          message: `Unable to load preferences 😓: ${err}`,
+          type: 'is-danger',
+        });
+      } else {
+        this.daily = data.daily;
+        this.restock = data.restock;
 
+        this.loading = false;
+      }
+    });
   },
 };
 </script>

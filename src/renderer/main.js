@@ -16,7 +16,7 @@ Vue.use(Buefy, {
   defaultIconPack: 'fas',
 });
 
-fontawesome.library.add(solid.faWrench, solid.faClock, regular.faSave);
+fontawesome.library.add(solid.faCog, regular.faSave);
 
 /* eslint-disable no-new */
 new Vue({
