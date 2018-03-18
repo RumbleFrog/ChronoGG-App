@@ -2,7 +2,6 @@
 
 import { Notification } from 'electron';
 import Storage from 'electron-json-storage';
-import Path from 'path';
 import Chrono from './Chrono';
 
 const Sale = {};
@@ -32,7 +31,7 @@ Sale.notify = function (data) {
     new Notification({
         title: 'ChronoGG Daily Deal',
         body: data.name,
-        icon: Path.join(__static, 'icons', 'icon.png'),
+        icon: require('path').join(__static, 'icons', 'icon.png'),
     })
 }
 
