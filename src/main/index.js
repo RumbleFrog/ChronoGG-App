@@ -60,6 +60,8 @@ function createWindow() {
   ]);
 
   appIcon.setContextMenu(contextMenu);
+
+  mainWindow.tray = appIcon;
 }
 
 app.on('ready', createWindow);
