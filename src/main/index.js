@@ -4,8 +4,8 @@ import Storage from 'electron-json-storage';
 import log from 'electron-log';
 import path from 'path';
 
-log.transports.file.level = "info";
-log.transports.file.file = __dirname + 'chronogg.log';
+log.transports.file.level = 'info';
+log.transports.file.file = `${__dirname}chronogg.log`;
 
 /**
  * Set `__static` path to static files in production
@@ -87,6 +87,7 @@ app.on('activate', () => {
 
 new AutoLaunch({
   name: 'ChronoGG App',
+  path: app.getPath('exe'),
   isHidden: true,
 }).enable();
 
