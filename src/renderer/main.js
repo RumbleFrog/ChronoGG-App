@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
 
-// import fontawesome from '@fortawesome/fontawesome';
+import fontawesome from '@fortawesome/fontawesome';
+import solid from '@fortawesome/fontawesome-free-solid';
 
 import App from './App';
 import router from './router';
@@ -11,8 +12,10 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'));
 Vue.config.productionTip = false;
 
 Vue.use(Buefy, {
-  defaultIconpack: 'fas',
+  defaultIconPack: 'fas',
 });
+
+fontawesome.library.add(solid.faWrench, solid.faClock);
 
 /* eslint-disable no-new */
 new Vue({

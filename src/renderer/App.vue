@@ -1,22 +1,98 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <span class="tag is-primary"></span>
+    <section class="hero is-chrono is-fullheight">
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item">
+                <img src="~@/assets/chrono_header.svg" alt="Logo">
+              </a>
+              <span class="navbar-burger burger" @click="navMenuActive = !navMenuActive">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div class="navbar-menu" :class="{'is-active': navMenuActive}">
+              <div class="navbar-end">
+                <router-link :to="{ name: 'Settings', params: {} }" class="navbar-item">
+                  <b-icon icon="wrench"></b-icon>&nbsp;<span>Settings</span>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <div class="hero-body pattern-bg">
+        <div class="container has-text-centered">
+          <router-view></router-view>
+        </div>
+      </div>
+
+      <div class="hero-foot footer" style="padding:3rem 1.5rem 3rem">
+          <div class="container">
+              <div class="content has-text-centered">
+                  Made with <i class="fas fa-heart" style="color:#DA2444"></i> by <a @click="open('https://community.chrono.gg/u/RumbleFrog')">RumbleFrog</a>
+              </div>
+          </div>
+      </div>
+
+    </section>
   </div>
 </template>
 
 <script>
   export default {
     name: 'chronogg-app',
+    data() {
+      return {
+        navMenuActive: false,
+      };
+    },
+    methods: {
+      open(link) {
+        this.$electron.shell.openExternal(link);
+      },
+    },
   };
 </script>
 
 <style lang="scss">
   @import "~bulma/sass/utilities/_all";
 
-  $primary: #38214D;
-  $tag-background-color: $primary;
+  $chrono: #38214D;
+  $chrono-invert: findColorInvert($chrono);
+  $chrono-white: #f4f4f4;
+  
+  $colors: (
+    "white": ($chrono-white, $black),
+    "black": ($black, $chrono-white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "chrono": ($chrono, $chrono-invert),
+  );
+
+  $footer-background-color: $chrono;
+
+  $link: $primary;
+  $link-invert: $primary-invert;
+  $link-focus-border: $primary;
+
+  $link-hover: $info;
 
   @import "~bulma";
   @import "~buefy/src/scss/buefy";
+</style>
+
+<style>
+.pattern-bg {
+  background: -webkit-radial-gradient(50% bottom,rgba(34,15,51,0) 0,rgba(34,15,51,.8) 70%),url('~@/assets/bg_pattern.svg') 0 0;
+}
 </style>
