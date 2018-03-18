@@ -1,28 +1,6 @@
-# ChronoGG-App
+# ChronoGG App
 
-> ChronoGG App
+> Simple implementation of ChronoGG reminder
 
-#### Build Setup
-
-``` bash
-# install dependencies
-yarn
-
-# serve with hot reload at localhost:9080
-yarn run dev
-
-# build electron application for production
-yarn run build
-
-# run unit & end-to-end tests
-yarn test
-
-
-# lint all JS/Vue component files in `src/`
-yarn run lint
-
-```
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+[![Build Status](https://travis-ci.org/RumbleFrog/ChronoGG-App.svg?branch=master)](https://travis-ci.org/RumbleFrog/ChronoGG-App)
+[![Build status](https://ci.appveyor.com/api/projects/status/8nhbbpqanivjht9q?svg=true)](https://ci.appveyor.com/project/RumbleFrog/chronogg-app)
