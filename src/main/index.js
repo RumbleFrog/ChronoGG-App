@@ -76,10 +76,9 @@ app.on('ready', () => {
 
   log.info(`Executable path: ${app.getPath('exe')}`);
 
-  Storage.get('preference', (err, data) => {
+  Storage.has('preference', (err, has) => {
     if (err) log.error(err);
-    else if (!Object.prototype.hasOwnProperty.call(data, 'daily') || !Object.prototype.hasOwnProperty.call(data, 'restock')) {
-      log.info('Populated preference file');
+    else if (!has) {
       Storage.set('preference', {
         daily: true,
         restock: true,
