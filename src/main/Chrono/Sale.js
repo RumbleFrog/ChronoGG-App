@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { Notification } from 'electron';
+import Notification from 'node-notifier';
 import Storage from 'electron-json-storage';
 import Chrono from './Chrono';
 
@@ -18,7 +18,7 @@ Sale.getLast = function () {
 Sale.store = function (data) {
     return new Promise((resolve, reject) => {
         Storage.set('sale', {
-            id: data.name.toBase64(),
+            id: Buffer.from(data.name).toString('base64'),
             meta: data,
         }, (err) => {
             if (err) reject(err);
@@ -28,34 +28,36 @@ Sale.store = function (data) {
 }
 
 Sale.notify = function (data) {
-    new Notification({
+    Notification.notify({
         title: 'ChronoGG Daily Deal',
-        body: data.name,
+        message: data.name,
         icon: require('path').join(__static, 'icons', 'icon.png'),
+        sound: true,
+        wait: true,
     })
 }
 
 Sale.run = function () {
     return new Promise((resolve, reject) => {
-        const Current = Chrono.getSale()[0];
-
-        Storage.has('sale', (err, has) => {
-            if (err) reject(err);
-            else {
-                if (!has) {
-                    Sale.store(Current);
-                    Sale.notify(Current);
-                } else {
-                    Sale
-                        .getLast()
-                        .then((last) => {
-                            if (last.id !== Current.name.toBase64()) {
-                                Sale.store(Current);
-                                Sale.notify(Current);
-                            }
-                        })
+        Chrono.getSale().then((Current) => {
+            Storage.has('sale', (err, has) => {
+                if (err) reject(err);
+                else {
+                    if (!has) {
+                        Sale.store(Current);
+                        Sale.notify(Current);
+                    } else {
+                        Sale
+                            .getLast()
+                            .then((last) => {
+                                if (last.id !== new Buffer(Current.name).toString('base64')) {
+                                    Sale.store(Current);
+                                    Sale.notify(Current);
+                                }
+                            })
+                    }
                 }
-            }
+            })
         })
     })
 }

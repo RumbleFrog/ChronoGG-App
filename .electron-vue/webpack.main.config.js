@@ -40,9 +40,13 @@ let mainConfig = {
     ]
   },
   node: {
-    __dirname: process.env.NODE_ENV !== 'production',
-    __filename: process.env.NODE_ENV !== 'production'
+    __dirname: true,
+    __filename: true
   },
+  // node: {
+  //   __dirname: process.env.NODE_ENV !== 'production',
+  //   __filename: process.env.NODE_ENV !== 'production'
+  // },
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
