@@ -1,6 +1,11 @@
 import { app, BrowserWindow, Menu, Tray } from 'electron' // eslint-disable-line
 import AutoLaunch from 'auto-launch';
+import Storage from 'electron-json-storage';
+import log from 'electron-log';
 import path from 'path';
+
+log.transports.file.level = "info";
+log.transports.file.file = __dirname + 'chronogg.log';
 
 /**
  * Set `__static` path to static files in production
@@ -64,7 +69,9 @@ function createWindow() {
   mainWindow.tray = appIcon;
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

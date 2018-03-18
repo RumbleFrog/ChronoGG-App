@@ -1,17 +1,28 @@
 <template>
   <div class="column is-4 is-offset-one-third">
     <b-field>
-      <b-timepicker rounded placeholder="Select a convenient time..." icon="clock" hour-format="24"></b-timepicker>
+      <b-timepicker rounded placeholder="Select a convenient time..." icon="clock" hour-format="24" v-model="time" :loading="loading"></b-timepicker>
     </b-field>
     <b-field>
-      <button class="button is-rounded chrono-button">Save Setting</button>
+      <button class="button is-rounded chrono-button" :class="{'is-loading': loading}">Save Setting</button>
     </b-field>
   </div>
 </template>
 
 <script>
+// import storage from 'electron-json-storage';
+
 export default {
   name: 'Settings',
+  data() {
+    return {
+      loading: false,
+      time: null,
+    };
+  },
+  mounted() {
+
+  },
 };
 </script>
 
