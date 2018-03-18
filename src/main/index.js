@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, Tray } from 'electron' // eslint-disable-line
+import AutoLaunch from 'auto-launch';
 import path from 'path';
 
 /**
@@ -74,6 +75,11 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+new AutoLaunch({
+  name: 'ChronoGG App',
+  isHidden: true,
+}).enable();
 
 /**
  * Auto Updater
