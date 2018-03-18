@@ -44,7 +44,7 @@ function createWindow() {
     return false;
   });
 
-  const appIcon = new Tray(path.join(__static, 'logo.png'));
+  const appIcon = new Tray(path.join(__static, 'icons', 'logo.png'));
 
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Show App',
