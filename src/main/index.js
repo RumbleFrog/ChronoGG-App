@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, Tray } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, Menu, Tray, nativeImage } from 'electron' // eslint-disable-line
 import AutoLaunch from 'auto-launch';
 import Storage from 'electron-json-storage';
 import log from 'electron-log';
@@ -53,7 +53,9 @@ function createWindow() {
     return false;
   });
 
-  const appIcon = new Tray(path.join(__static, 'icons', 'icon.png'));
+  const icon = nativeImage.createFromPath(path.join(__static, 'icons', 'icon.png'));
+
+  const appIcon = new Tray(icon);
 
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Show App',
