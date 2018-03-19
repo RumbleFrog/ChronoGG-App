@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+import { Shell } from 'electron';
 import Notification from 'node-notifier';
 import Storage from 'electron-json-storage';
 import Chrono from './Chrono';
@@ -28,12 +29,16 @@ Sale.store = function (data) {
 }
 
 Sale.notify = function (data) {
-    Notification.notify({
+    const SN = Notification.notify({
         title: 'ChronoGG Daily Deal',
         message: data.name,
         icon: require('path').join(__static, 'icons', 'icon.png'),
         sound: true,
         wait: true,
+    });
+
+    SN.on('click', (notifierObject, options) => {
+        Shell.openExternal('https://chrono.gg');
     })
 }
 
