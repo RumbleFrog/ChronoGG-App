@@ -5,8 +5,6 @@ import log from 'electron-log';
 import isDev from 'electron-is-dev';
 import path from 'path';
 
-import Sale from './Chrono/Sale';
-
 log.transports.file.level = 'info';
 
 /**
@@ -89,8 +87,6 @@ app.on('ready', () => {
       });
     }
   });
-
-  Sale.run();
 });
 
 app.on('window-all-closed', () => {
