@@ -30,6 +30,9 @@
     "files": [
       "dist/electron/**/*"
     ],
+    "asarUnpack": [
+      "dist/electron/static/**"
+    ],
     "dmg": {
       "contents": [
         {
@@ -60,6 +63,7 @@
     "electron-is-dev": "^0.3.0",
     "electron-json-storage": "^4.0.2",
     "electron-log": "^2.2.14",
+    "hazardous": "^0.3.0",
     "node-notifier": "^5.2.1",
     "request": "^2.85.0",
     "vue": "^2.3.3",

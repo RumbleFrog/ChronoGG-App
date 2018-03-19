@@ -1,12 +1,11 @@
+/* eslint-disable import/first */
+
 import { app, BrowserWindow, Menu, Tray, nativeImage } from 'electron' // eslint-disable-line
 import AutoLaunch from 'auto-launch';
 import Storage from 'electron-json-storage';
 import log from 'electron-log';
 import isDev from 'electron-is-dev';
 import path from 'path';
-
-import Sale from './Chrono/Sale';
-import Restock from './Chrono/Restock';
 
 log.transports.file.level = 'info';
 
@@ -17,6 +16,12 @@ log.transports.file.level = 'info';
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
+
+// Import after global __static
+import Sale from './Chrono/Sale';
+import Restock from './Chrono/Restock';
+
+log.info(__static);
 
 let mainWindow;
 const winURL = process.env.NODE_ENV === 'development'
