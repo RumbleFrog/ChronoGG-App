@@ -5,6 +5,9 @@ import log from 'electron-log';
 import isDev from 'electron-is-dev';
 import path from 'path';
 
+import Sale from './Chrono/Sale';
+import Restock from './Chrono/Restock';
+
 log.transports.file.level = 'info';
 
 /**
@@ -69,6 +72,19 @@ function createWindow() {
   mainWindow.tray = appIcon;
 }
 
+function tryRun() {
+  Storage.get('preference', (err, data) => {
+    if (!err) {
+      if (data.daily === true) {
+        Sale.run();
+      }
+      if (data.restock === true) {
+        Restock.run();
+      }
+    } else log.error(err);
+  });
+}
+
 app.on('ready', () => {
   createWindow();
 
@@ -84,7 +100,16 @@ app.on('ready', () => {
         restock: true,
       }, (err) => {
         if (err) log.error(err);
+        else {
+          tryRun();
+
+          setInterval(tryRun, 60 * 30 * 1000);
+        }
       });
+    } else {
+      tryRun();
+
+      setInterval(tryRun, 60 * 30 * 1000);
     }
   });
 });
