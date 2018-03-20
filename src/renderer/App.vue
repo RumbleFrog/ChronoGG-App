@@ -19,6 +19,9 @@
                 <router-link :to="{ name: 'Settings', params: {} }" class="navbar-item">
                   <b-icon icon="cog" custom-class="fa-spin"></b-icon>&nbsp;<span>Settings</span>
                 </router-link>
+                <router-link :to="{ name: 'About', params: {} }" class="navbar-item">
+                  <b-icon icon="question"></b-icon>&nbsp;<span>About</span>
+                </router-link>
               </div>
             </div>
           </div>

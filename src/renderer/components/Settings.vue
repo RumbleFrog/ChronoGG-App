@@ -67,12 +67,13 @@ export default {
 
 <style>
 .chrono-button {
-  border: 0;
-  color: #2e2150;
+  border: 0 !important;
+  color: #2e2150 !important;
   background: linear-gradient(-180deg,#ffd53e,#ffa24d);
 }
 
 .chrono-button:hover {
+  border: 0;
   color: #2e2150;
   background: linear-gradient(-180deg,#ffdb58,#ffb33e);
   box-shadow: 0 2px 8px rgba(0,0,0,.5);
