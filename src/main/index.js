@@ -114,6 +114,8 @@ app.on('ready', () => {
         }
       });
     } else {
+      mainWindow.hide();
+
       tryRun();
 
       setInterval(tryRun, 60 * 30 * 1000);
