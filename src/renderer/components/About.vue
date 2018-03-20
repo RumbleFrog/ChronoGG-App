@@ -24,7 +24,7 @@
           <p>Feel free to DM me on the ChronoGG Community</p>
         </div>
       </div>
-      </div>
+    </div>
 </template>
 
 <script>
