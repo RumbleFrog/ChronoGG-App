@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { Shell } from 'electron';
+import { shell as Shell } from 'electron';
 import Notification from 'node-notifier';
 import Storage from 'electron-json-storage';
 import Chrono from './Chrono';
