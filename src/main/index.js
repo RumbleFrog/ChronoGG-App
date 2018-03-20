@@ -76,6 +76,10 @@ function createWindow() {
 
   appIcon.setContextMenu(contextMenu);
 
+  appIcon.on('double-click', () => {
+    mainWindow.show();
+  });
+
   mainWindow.tray = appIcon;
 }
 
