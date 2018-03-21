@@ -133,7 +133,7 @@ app.on('ready', () => {
 
       tryRun();
 
-      setInterval(tryRun, 60 * 30 * 1000);
+      setInterval(tryRun, 30 * 60 * 1000);
     }
   });
 });
