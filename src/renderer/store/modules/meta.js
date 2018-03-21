@@ -1,9 +1,9 @@
-import { remote } from 'electron';
+import { remote } from "electron";
 
 const state = {
-  version: remote.app.getVersion(),
+  version: remote.app.getVersion()
 };
 
 export default {
-  state,
+  state
 };

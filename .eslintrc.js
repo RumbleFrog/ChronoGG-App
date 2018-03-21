@@ -8,12 +8,16 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: 'airbnb-base',
+  extends: [
+    'airbnb-base',
+    'plugin:prettier/recommended',
+  ],
   globals: {
     __static: true
   },
   plugins: [
-    'html'
+    'html',
+    'prettier',
   ],
   'rules': {
     'global-require': 0,
@@ -25,6 +29,7 @@ module.exports = {
     'import/newline-after-import': 0,
     'no-multi-assign': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'prettier/prettier': 'error',
   }
 }

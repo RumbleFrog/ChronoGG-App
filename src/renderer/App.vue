@@ -67,8 +67,7 @@
         release: this.$store.state.meta.version,
       });
     },
-  };
-</script>
+  };</script>
 
 <style lang="scss">
   @import "~bulma/sass/utilities/_all";

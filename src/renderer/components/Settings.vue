@@ -62,8 +62,7 @@ export default {
       }
     });
   },
-};
-</script>
+};</script>
 
 <style>
 .chrono-button {
