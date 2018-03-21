@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+import Hazardous from 'hazardous';
 import { shell as Shell } from 'electron';
 import Notification from 'node-notifier';
 import Storage from 'electron-json-storage';
