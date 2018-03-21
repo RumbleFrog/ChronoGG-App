@@ -13,7 +13,7 @@ import { SentryClient } from '@sentry/electron';
 log.transports.file.level = 'info';
 
 SentryClient.create({
-  dsn: 'https://cccd31289c364e1389d399bdb8dd6b2f:22d17806c5064d2bb5907d6197765527@sentry.io/374087',
+  dsn: 'https://cccd31289c364e1389d399bdb8dd6b2f@sentry.io/374087',
   release: app.getVersion(),
 });
 
