@@ -21,22 +21,15 @@
         </div>
         <div class="content">
           <h1 class="title">Hey, I'm having some trouble with this app.</h1>
-          <p>Feel free to open an issue on the <a @click="open('https://github.com/RumbleFrog/ChronoGG-App/issues')">tracker</a> along with the app version ({{ version }}) and the problem you are encountering.</p>
+          <p>Feel free to open an issue on the <a @click="open('https://github.com/RumbleFrog/ChronoGG-App/issues')">tracker</a> along with the app version ({{ this.$store.state.meta.version }}) and the problem you are encountering.</p>
         </div>
       </div>
     </div>
 </template>
 
 <script>
-import { remote } from 'electron';
-
 export default {
   name: 'About',
-  data() {
-    return {
-      version: remote.app.getVersion(),
-    };
-  },
   methods: {
     open(link) {
       this.$electron.shell.openExternal(link);

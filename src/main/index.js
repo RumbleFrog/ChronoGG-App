@@ -8,8 +8,14 @@ import isDev from 'electron-is-dev';
 import path from 'path';
 import { exec } from 'child_process';
 import os from 'os';
+import { SentryClient } from '@sentry/electron';
 
 log.transports.file.level = 'info';
+
+SentryClient.create({
+  dsn: 'https://cccd31289c364e1389d399bdb8dd6b2f:22d17806c5064d2bb5907d6197765527@sentry.io/374087',
+  release: app.getVersion(),
+});
 
 /**
  * Set `__static` path to static files in production
@@ -114,12 +120,12 @@ app.on('ready', () => {
 
             tryRun();
 
-            setInterval(tryRun, 60 * 30 * 1000);
+            setInterval(tryRun, 30 * 60 * 1000);
           });
         } else {
           tryRun();
 
-          setInterval(tryRun, 60 * 30 * 1000);
+          setInterval(tryRun, 30 * 60 * 1000);
         }
       });
     } else {

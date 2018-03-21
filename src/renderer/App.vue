@@ -47,6 +47,8 @@
 </template>
 
 <script>
+  import { SentryClient } from '@sentry/electron';
+
   export default {
     name: 'chronogg-app',
     data() {
@@ -58,6 +60,12 @@
       open(link) {
         this.$electron.shell.openExternal(link);
       },
+    },
+    mounted() {
+      SentryClient.create({
+        dsn: 'https://cccd31289c364e1389d399bdb8dd6b2f:22d17806c5064d2bb5907d6197765527@sentry.io/374087',
+        release: this.$store.state.meta.version,
+      });
     },
   };
 </script>
