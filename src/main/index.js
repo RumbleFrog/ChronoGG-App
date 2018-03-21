@@ -6,6 +6,8 @@ import Storage from 'electron-json-storage';
 import log from 'electron-log';
 import isDev from 'electron-is-dev';
 import path from 'path';
+import { exec } from 'child_process';
+import os from 'os';
 
 log.transports.file.level = 'info';
 
@@ -106,10 +108,18 @@ app.on('ready', () => {
         restock: true,
       }, (err) => {
         if (err) log.error(err);
-        else {
+        else if (os.platform() === 'win32') {
+          exec('reg add HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings\\Snore.DesktopToasts /t REG_DWORD /v ShowInActionCenter /d 1 /f', (err) => {
+            if (err) log.error(err);
+
+            tryRun();
+
+            setInterval(tryRun, 60 * 30 * 1000);
+          });
+        } else {
           tryRun();
 
-          setInterval(tryRun, 30 * 60 * 1000);
+          setInterval(tryRun, 60 * 30 * 1000);
         }
       });
     } else {
@@ -117,7 +127,7 @@ app.on('ready', () => {
 
       tryRun();
 
-      setInterval(tryRun, 30 * 60 * 1000);
+      setInterval(tryRun, 60 * 30 * 1000);
     }
   });
 });
