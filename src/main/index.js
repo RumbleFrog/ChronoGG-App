@@ -109,10 +109,6 @@ function tryRun() {
 app.on("ready", () => {
   createWindow();
 
-  log.info(`${app.getName()} ready!`);
-
-  log.info(`Executable path: ${app.getPath("exe")}`);
-
   Storage.has("preference", (err, has) => {
     if (err) log.error(err);
     else if (!has) {
