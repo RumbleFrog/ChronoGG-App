@@ -1,5 +1,7 @@
 # ChronoGG App
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/RumbleFrog/ChronoGG-App.svg)](https://greenkeeper.io/)
+
 > Simple implementation of ChronoGG reminder
 
 [![Build Status](https://travis-ci.org/RumbleFrog/ChronoGG-App.svg?branch=master)](https://travis-ci.org/RumbleFrog/ChronoGG-App)
