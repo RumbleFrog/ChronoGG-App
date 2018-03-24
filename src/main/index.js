@@ -10,6 +10,9 @@ import { exec } from "child_process";
 import os from "os";
 import { SentryClient } from "@sentry/electron";
 
+import Sale from "./Chrono/Sale";
+import Restock from "./Chrono/Restock";
+
 log.transports.file.level = "info";
 
 SentryClient.create({
@@ -24,10 +27,6 @@ SentryClient.create({
 if (process.env.NODE_ENV !== "development") {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
-
-// Import after global __static
-import Sale from "./Chrono/Sale";
-import Restock from "./Chrono/Restock";
 
 log.info(__static);
 
