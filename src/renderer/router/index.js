@@ -16,6 +16,11 @@ export default new Router({
       component: require("@/components/About").default
     },
     {
+      path: "/SalePrompt",
+      name: "SalePrompt",
+      component: require("@/components/SalePrompt").default
+    },
+    {
       path: "*",
       redirect: "/"
     }

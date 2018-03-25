@@ -16,43 +16,47 @@
 </template>
 
 <script>
-import Storage from 'electron-json-storage';
+import Storage from "electron-json-storage";
 
 export default {
-  name: 'Settings',
+  name: "Settings",
   data() {
     return {
       loading: true,
       daily: null,
-      restock: null,
+      restock: null
     };
   },
   methods: {
     updateSetting() {
-      Storage.set('preference', {
-        daily: this.daily,
-        restock: this.restock,
-      }, (err) => {
-        if (err) {
-          this.$toast.open({
-            message: `Unable to save preferences 😓: ${err}`,
-            type: 'is-danger',
-          });
-        } else {
-          this.$toast.open({
-            message: 'Successfully saved your preferences 😄',
-            type: 'is-success',
-          });
+      Storage.set(
+        "preference",
+        {
+          daily: this.daily,
+          restock: this.restock
+        },
+        err => {
+          if (err) {
+            this.$toast.open({
+              message: `Unable to save preferences 😓: ${err}`,
+              type: "is-danger"
+            });
+          } else {
+            this.$toast.open({
+              message: "Successfully saved your preferences 😄",
+              type: "is-success"
+            });
+          }
         }
-      });
-    },
+      );
+    }
   },
   mounted() {
-    Storage.get('preference', (err, data) => {
+    Storage.get("preference", (err, data) => {
       if (err) {
         this.$toast.open({
           message: `Unable to load preferences 😓: ${err}`,
-          type: 'is-danger',
+          type: "is-danger"
         });
       } else {
         this.daily = data.daily;
@@ -61,20 +65,20 @@ export default {
         this.loading = false;
       }
     });
-  },
-};</script>
+  }
+};
+</script>
 
 <style>
 .chrono-button {
   border: 0 !important;
   color: #2e2150 !important;
-  background: linear-gradient(-180deg,#ffd53e,#ffa24d);
+  background: linear-gradient(-180deg, #ffd53e, #ffa24d);
 }
 
 .chrono-button:hover {
   border: 0;
   color: #2e2150;
-  background: linear-gradient(-180deg,#ffdb58,#ffb33e);
-  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+  background: linear-gradient(-180deg, #ffdb58, #ffb33e);
 }
 </style>

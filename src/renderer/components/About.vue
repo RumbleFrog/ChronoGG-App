@@ -29,10 +29,11 @@
 
 <script>
 export default {
-  name: 'About',
+  name: "About",
   methods: {
     open(link) {
       this.$electron.shell.openExternal(link);
-    },
-  },
-};</script>
+    }
+  }
+};
+</script>

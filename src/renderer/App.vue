@@ -47,62 +47,73 @@
 </template>
 
 <script>
-  import { SentryClient } from '@sentry/electron';
+import { SentryClient } from "@sentry/electron";
+import { ipcRenderer } from "electron";
 
-  export default {
-    name: 'chronogg-app',
-    data() {
-      return {
-        navMenuActive: false,
-      };
-    },
-    methods: {
-      open(link) {
-        this.$electron.shell.openExternal(link);
-      },
-    },
-    mounted() {
-      SentryClient.create({
-        dsn: 'https://cccd31289c364e1389d399bdb8dd6b2f@sentry.io/374087',
-        release: this.$store.state.meta.version,
-      });
-    },
-  };</script>
+export default {
+  name: "chronogg-app",
+  data() {
+    return {
+      navMenuActive: false
+    };
+  },
+  methods: {
+    open(link) {
+      this.$electron.shell.openExternal(link);
+    }
+  },
+  mounted() {
+    SentryClient.create({
+      dsn: "https://cccd31289c364e1389d399bdb8dd6b2f@sentry.io/374087",
+      release: this.$store.state.meta.version
+    });
+    ipcRenderer.on("saleprompt", (event, arg) => {
+      this.$store.dispatch("updateSale", arg);
+      this.$router.push("SalePrompt");
+    });
+  }
+};
+</script>
 
 <style lang="scss">
-  @import "~bulma/sass/utilities/_all";
+@import "~bulma/sass/utilities/_all";
 
-  $chrono: #38214D;
-  $chrono-invert: findColorInvert($chrono);
-  $chrono-white: #f4f4f4;
-  
-  $colors: (
-    "white": ($chrono-white, $black),
-    "black": ($black, $chrono-white),
-    "light": ($light, $light-invert),
-    "dark": ($dark, $dark-invert),
-    "primary": ($primary, $primary-invert),
-    "info": ($info, $info-invert),
-    "success": ($success, $success-invert),
-    "warning": ($warning, $warning-invert),
-    "danger": ($danger, $danger-invert),
-    "chrono": ($chrono, $chrono-invert),
-  );
+$chrono: #38214d;
+$chrono-invert: findColorInvert($chrono);
+$chrono-white: #f4f4f4;
 
-  $footer-background-color: $chrono;
+$colors: (
+  "white": ($chrono-white, $black),
+  "black": ($black, $chrono-white),
+  "light": ($light, $light-invert),
+  "dark": ($dark, $dark-invert),
+  "primary": ($primary, $primary-invert),
+  "info": ($info, $info-invert),
+  "success": ($success, $success-invert),
+  "warning": ($warning, $warning-invert),
+  "danger": ($danger, $danger-invert),
+  "chrono": ($chrono, $chrono-invert)
+);
 
-  $link: $primary;
-  $link-invert: $primary-invert;
-  $link-focus-border: $primary;
+$footer-background-color: $chrono;
 
-  $link-hover: $info;
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
 
-  @import "~bulma";
-  @import "~buefy/src/scss/buefy";
+$link-hover: $info;
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
 </style>
 
 <style>
 .pattern-bg {
-  background: -webkit-radial-gradient(50% bottom,rgba(34,15,51,0) 0,rgba(34,15,51,.8) 70%),url('~@/assets/bg_pattern.svg') 0 0;
+  background: -webkit-radial-gradient(
+      50% bottom,
+      rgba(34, 15, 51, 0) 0,
+      rgba(34, 15, 51, 0.8) 70%
+    ),
+    url("~@/assets/bg_pattern.svg") 0 0;
 }
 </style>

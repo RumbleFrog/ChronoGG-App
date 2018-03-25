@@ -28,8 +28,6 @@ if (process.env.NODE_ENV !== "development") {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
 
-log.info(__static);
-
 let mainWindow;
 const winURL =
   process.env.NODE_ENV === "development"
@@ -96,7 +94,7 @@ function tryRun() {
   Storage.get("preference", (err, data) => {
     if (!err) {
       if (data.daily === true) {
-        Sale.run();
+        Sale.run(mainWindow);
       }
       if (data.restock === true) {
         Restock.run();
