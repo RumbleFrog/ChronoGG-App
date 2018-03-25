@@ -1,10 +1,8 @@
-{
-  "announcements": [
-    {
-      "_id": "timestamp",
-      "title": "The title of the announcement; passed to SnoreToast",
-      "body": "The body of the announcement",
-      "link": "a link (empty if none)"
-    }
-  ]
-}
+[
+  {
+    "_id": "timestamp",
+    "title": "The title of the announcement; passed to SnoreToast",
+    "body": "The body of the announcement",
+    "link": "a link (empty if none)"
+  }
+]

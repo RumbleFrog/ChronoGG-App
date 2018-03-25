@@ -71,8 +71,7 @@ export default {
       this.$electron.shell.openExternal(link);
     }
   }
-};
-</script>
+};</script>
 
 <style>
 .chrono-button {

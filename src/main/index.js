@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 
-import { app, BrowserWindow, Menu, Tray, nativeImage } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, Menu, Tray, nativeImage } from "electron"; // eslint-disable-line
 import AutoLaunch from "auto-launch";
 import Storage from "electron-json-storage";
 import log from "electron-log";
@@ -12,6 +12,7 @@ import { SentryClient } from "@sentry/electron";
 
 import Sale from "./Chrono/Sale";
 import Restock from "./Chrono/Restock";
+import Announcement from "./Chrono/Announcement";
 
 log.transports.file.level = "info";
 
@@ -25,7 +26,7 @@ SentryClient.create({
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== "development") {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
+  global.__static = require("path").join(__dirname, "/static").replace(/\\/g, "\\\\"); // eslint-disable-line
 }
 
 let mainWindow;
@@ -93,12 +94,9 @@ function createWindow() {
 function tryRun() {
   Storage.get("preference", (err, data) => {
     if (!err) {
-      if (data.daily === true) {
-        Sale.run(mainWindow);
-      }
-      if (data.restock === true) {
-        Restock.run();
-      }
+      if (data.daily === true) Sale.run(mainWindow);
+      if (data.restock === true) Restock.run();
+      Announcement.run();
     } else log.error(err);
   });
 }

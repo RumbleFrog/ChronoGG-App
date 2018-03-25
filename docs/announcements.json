@@ -1,10 +1,8 @@
-{
-    "announcements": [
-        {
-            "_id": 1521949575792,
-            "title": "This is a test message",
-            "body": "Hello world",
-            "link": ""
-        }
-    ]
-}
+[
+  {
+    "_id": 1521949575792,
+    "title": "This is a test message",
+    "body": "Hello world",
+    "link": ""
+  }
+]

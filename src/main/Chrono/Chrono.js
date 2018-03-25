@@ -1,25 +1,25 @@
 /* eslint-disable */
 
-import Request from 'request';
+import Request from "request";
 
 const Chrono = {};
 
 Chrono.ChronoQuest = Request.defaults({
-  baseUrl: 'https://api.chrono.gg/',
+  baseUrl: "https://api.chrono.gg/"
 });
 
-Chrono.getSale = function () {
+Chrono.getSale = function() {
   return new Promise((resolve, reject) => {
-    Chrono.ChronoQuest('sale', (err, res, body) => {
+    Chrono.ChronoQuest("sale", (err, res, body) => {
       if (err) reject(err);
       else resolve(JSON.parse(body));
     });
   });
 };
 
-Chrono.getShop = function () {
+Chrono.getShop = function() {
   return new Promise((resolve, reject) => {
-    Chrono.ChronoQuest('shop', (err, res, body) => {
+    Chrono.ChronoQuest("shop", (err, res, body) => {
       if (err) reject(err);
       else resolve(JSON.parse(body));
     });

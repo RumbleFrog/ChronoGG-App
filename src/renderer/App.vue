@@ -72,8 +72,7 @@ export default {
       this.$router.push("SalePrompt");
     });
   }
-};
-</script>
+};</script>
 
 <style lang="scss">
 @import "~bulma/sass/utilities/_all";
