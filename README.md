@@ -22,6 +22,8 @@ You can either (a) ignore it by clicking **More Info** and **Run anyway**, or (b
 ```
 git clone git@github.com:RumbleFrog/ChronoGG-App.git
 
+cd ChronoGG-App
+
 yarn (npm install)
 
 yarn run build (npm run build)
