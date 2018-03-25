@@ -49,7 +49,7 @@
             </button>
           </b-field>
           <b-field>
-            <button class="button chrono-button is-rounded is-fullwidth" @click="open('https://www.chrono.gg/')">
+            <button class="button chrono-button is-rounded is-fullwidth" @click="open(s().url)">
               <b-icon pack="fas" icon="gamepad"></b-icon>&nbsp;
               <span>Visit ChronoGG Site</span>
             </button>
