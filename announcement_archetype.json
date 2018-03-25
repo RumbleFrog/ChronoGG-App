@@ -1,5 +1,9 @@
 {
-    "_id": "base64(title;timestamp)",
-    "title": "The title of the announcement; passed to SnoreToast",
-    "body": "The body of the announcement"
+  "announcements": [
+    {
+      "_id": "base64(title;timestamp)",
+      "title": "The title of the announcement; passed to SnoreToast",
+      "body": "The body of the announcement"
+    }
+  ]
 }
