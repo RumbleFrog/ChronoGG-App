@@ -40,7 +40,7 @@ Announcement.store = function(announcements) {
     Storage.set(
       "announcements",
       {
-        announcements: announcements
+        announcements: announcements.map(a => a._id)
       },
       err => {
         if (err) reject(err);
@@ -51,7 +51,7 @@ Announcement.store = function(announcements) {
 };
 
 Announcement.notify = function(announcements) {
-  announcements.forEach((a) => {
+  announcements.forEach(a => {
     const AN = Notification.notify({
       title: a.title,
       message: a.body,
@@ -59,13 +59,12 @@ Announcement.notify = function(announcements) {
       sound: true,
       wait: true
     });
-  
+
     AN.on("click", (notifierObject, options) => {
-      if (a.link !== "")
-        Shell.openExternal(a.link);
+      if (a.link !== "") Shell.openExternal(a.link);
     });
-  })
-}
+  });
+};
 
 Announcement.run = function() {
   return new Promise((resolve, reject) => {
@@ -76,10 +75,12 @@ Announcement.run = function() {
           if (!has) Announcement.store(announcements);
           else {
             Announcement.store(announcements);
-            Announcement.notify(Announcement.intersect(announcements));
+            Announcement.intersect(announcements).then(intersections => {
+              if (intersections.length > 0) Announcement.notify(intersections);
+            });
           }
         }
-      })
+      });
     });
   });
 };
