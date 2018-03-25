@@ -1,14 +1,1 @@
-[
-  {
-    "_id": 1521953563812,
-    "title": "Simple Link Announcement",
-    "body": "Click me!",
-    "link": "https://github.com/RumbleFrog/ChronoGG-App"
-  },
-  {
-    "_id": 1521949575792,
-    "title": "This is a test message",
-    "body": "Hello world",
-    "link": ""
-  }
-]
+[]
