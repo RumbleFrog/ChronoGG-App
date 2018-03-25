@@ -13,6 +13,18 @@
 
 # Disclaimer
 
-If you download Windows binary from Github releases, Windows SmartScreen will try to block it when you open it; the reason is due to https://forums.aws.amazon.com/thread.jspa?threadID=85516
+If you download Windows binary from Github releases, Windows SmartScreen will try to block it when you open it; due to unestablished file reputation.
 
 You can either (a) ignore it by clicking **More Info** and **Run anyway**, or (b) clone this repository, and build it yourself if you feel unsafe
+
+# Building it yourself
+
+```
+git clone git@github.com:RumbleFrog/ChronoGG-App.git
+
+yarn (npm install)
+
+yarn run build (npm run build)
+```
+
+The executable will be within `build/`
