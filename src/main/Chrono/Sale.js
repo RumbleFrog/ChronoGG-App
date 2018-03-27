@@ -16,7 +16,7 @@ Sale.getLast = function() {
   });
 };
 
-Sale.store = function(data) {
+Sale.store = function(data, window) {
   return new Promise((resolve, reject) => {
     Storage.set(
       "sale",
@@ -26,7 +26,10 @@ Sale.store = function(data) {
       },
       err => {
         if (err) reject(err);
-        else resolve();
+        else {
+          window.webContents.send("dispatchSale", data);
+          resolve();
+        }
       }
     );
   });
@@ -53,15 +56,17 @@ Sale.run = function(window) {
       Storage.has("sale", (err, has) => {
         if (err) reject(err);
         else {
-          if (!has) {
-            Sale.store(Current);
-            Sale.notify(Current, window);
-          } else {
+          if (!has)
+            Sale.store(Current, window).then(() =>
+              Sale.notify(Current, window)
+            );
+          else {
             Sale.getLast().then(last => {
-              if (last.id !== new Buffer(Current.name).toString("base64")) {
-                Sale.store(Current);
-                Sale.notify(Current, window);
-              }
+              if (last.id !== new Buffer(Current.name).toString("base64"))
+                Sale.store(Current, window).then(() =>
+                  Sale.notify(Current, window)
+                );
+              Sale.store(Current, window);
             });
           }
         }

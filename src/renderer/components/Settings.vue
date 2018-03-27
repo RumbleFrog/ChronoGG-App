@@ -23,8 +23,8 @@ export default {
   data() {
     return {
       loading: true,
-      daily: null,
-      restock: null
+      daily: true,
+      restock: true
     };
   },
   methods: {
@@ -53,16 +53,15 @@ export default {
   },
   mounted() {
     Storage.get("preference", (err, data) => {
+      this.loading = false;
       if (err) {
         this.$toast.open({
           message: `Unable to load preferences 😓: ${err}`,
           type: "is-danger"
         });
-      } else {
+      } else if (data.daily && data.restock) {
         this.daily = data.daily;
         this.restock = data.restock;
-
-        this.loading = false;
       }
     });
   }

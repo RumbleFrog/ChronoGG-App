@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 
-import { app, BrowserWindow, Menu, Tray, nativeImage } from "electron"; // eslint-disable-line
+import { app, BrowserWindow, Menu, Tray, nativeImage, ipcMain } from "electron"; // eslint-disable-line
 import AutoLaunch from "auto-launch";
 import Storage from "electron-json-storage";
 import log from "electron-log";
@@ -103,7 +103,29 @@ function tryRun() {
 
 app.on("ready", () => {
   createWindow();
+});
 
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});
+
+app.on("activate", () => {
+  if (mainWindow === null) {
+    createWindow();
+  }
+});
+
+if (!isDev) {
+  new AutoLaunch({
+    name: "ChronoGG App",
+    path: app.getPath("exe"),
+    isHidden: true
+  }).enable();
+}
+
+ipcMain.on("chronoready", () => {
   Storage.has("preference", (err, has) => {
     if (err) log.error(err);
     else if (!has) {
@@ -142,26 +164,6 @@ app.on("ready", () => {
     }
   });
 });
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
-
-if (!isDev) {
-  new AutoLaunch({
-    name: "ChronoGG App",
-    path: app.getPath("exe"),
-    isHidden: true
-  }).enable();
-}
 
 /**
  * Auto Updater

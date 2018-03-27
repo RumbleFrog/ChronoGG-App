@@ -16,6 +16,9 @@
             </div>
             <div class="navbar-menu" :class="{'is-active': navMenuActive}">
               <div class="navbar-end">
+                <router-link :to="{ name: 'SalePrompt', params: {} }" class="navbar-item" v-if="this.$store.state.sale.sale !== null">
+                  <b-icon icon="gamepad"></b-icon>&nbsp;<span>Sale</span>
+                </router-link>
                 <router-link :to="{ name: 'Settings', params: {} }" class="navbar-item">
                   <b-icon icon="cog" custom-class="fa-spin"></b-icon>&nbsp;<span>Settings</span>
                 </router-link>
@@ -51,7 +54,7 @@ import { SentryClient } from "@sentry/electron";
 import { ipcRenderer } from "electron";
 
 export default {
-  name: "chronogg-app",
+  name: "ChronoGG-App",
   data() {
     return {
       navMenuActive: false
@@ -67,8 +70,11 @@ export default {
       dsn: "https://cccd31289c364e1389d399bdb8dd6b2f@sentry.io/374087",
       release: this.$store.state.meta.version
     });
-    ipcRenderer.on("saleprompt", (event, arg) => {
+    ipcRenderer.send("chronoready");
+    ipcRenderer.on("dispatchSale", (event, arg) => {
       this.$store.dispatch("updateSale", arg);
+    });
+    ipcRenderer.on("saleprompt", () => {
       this.$router.push("SalePrompt");
     });
   }
