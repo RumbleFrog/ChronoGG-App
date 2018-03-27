@@ -8,6 +8,11 @@ import Request from "request";
 
 const Announcement = {};
 
+/**
+ * Fetches announcements from Github pages endpoint
+ *
+ * @returns {Promise<any>} Resolves with parsed JSON object, otherwise reject with request error
+ */
 Announcement.fetch = function() {
   return new Promise((resolve, reject) => {
     Request(
@@ -20,6 +25,12 @@ Announcement.fetch = function() {
   });
 };
 
+/**
+ * Compares current announcements with storage in memory, resolving the non-conflicting announcements
+ *
+ * @param announcements Raw current announcements
+ * @returns {Promise<any>} Resolves w/ non-conflicting announcements, otherwise reject with storage error
+ */
 Announcement.intersect = function(announcements) {
   return new Promise((resolve, reject) => {
     Storage.get("announcements", (err, data) => {
@@ -35,6 +46,12 @@ Announcement.intersect = function(announcements) {
   });
 };
 
+/**
+ * Storage helper for mapping announcement to their `_ids` and storing it
+ *
+ * @param announcements The unmodified array of announcements regardless of intersection result
+ * @returns {Promise<any>} Resolves(null) w/o error, rejects with the error otherwise
+ */
 Announcement.store = function(announcements) {
   return new Promise((resolve, reject) => {
     Storage.set(
@@ -50,6 +67,12 @@ Announcement.store = function(announcements) {
   });
 };
 
+/**
+ * Fires corresponding platform notifier
+ *
+ * @param announcements Announcements passed through intersect
+ * @noreturn
+ */
 Announcement.notify = function(announcements) {
   announcements.forEach(a => {
     const AN = Notification.notify({
@@ -69,7 +92,7 @@ Announcement.notify = function(announcements) {
 /**
  * Service runner for announcement
  * 
- * @return {Promise} Resolves when complete & rejects when fail to fetch from Storage
+ * @return {Promise<any>} Resolves(null) when complete & rejects when fail to fetch from Storage
  */
 Announcement.run = function() {
   return new Promise((resolve, reject) => {
