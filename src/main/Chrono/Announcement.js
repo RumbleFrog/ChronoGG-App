@@ -66,6 +66,11 @@ Announcement.notify = function(announcements) {
   });
 };
 
+/**
+ * Service runner for announcement
+ * 
+ * @return {Promise} Resolves when complete & rejects when fail to fetch from Storage
+ */
 Announcement.run = function() {
   return new Promise((resolve, reject) => {
     Announcement.fetch().then(announcements => {
@@ -79,6 +84,7 @@ Announcement.run = function() {
               if (intersections.length > 0) Announcement.notify(intersections);
             });
           }
+          resolve();
         }
       });
     });
