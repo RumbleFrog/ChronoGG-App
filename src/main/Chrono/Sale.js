@@ -7,6 +7,12 @@ import Chrono from "./Chrono";
 
 const Sale = {};
 
+/**
+ * Retrieves the previous stored sale object from Storage
+ *
+ * @note Assumes `sale` key exists already
+ * @returns {Promise<any>} Resolves with sale object, otherwise rejects with Storage error
+ */
 Sale.getLast = function() {
   return new Promise((resolve, reject) => {
     Storage.get("sale", (err, data) => {
@@ -16,6 +22,13 @@ Sale.getLast = function() {
   });
 };
 
+/**
+ * Storage helper to save data from `/sale` endpoint
+ *
+ * @param {Object} data - Data derived from `/sale` endpoint
+ * @param {BrowserWindow} window - Instance of BrowserWindow in which to use to send IPC messages
+ * @returns {Promise<any>} Resolves({void}) when complete, otherwise rejects with Storage save error
+ */
 Sale.store = function(data, window) {
   return new Promise((resolve, reject) => {
     Storage.set(
@@ -35,6 +48,12 @@ Sale.store = function(data, window) {
   });
 };
 
+/**
+ * Fires corresponding platform notifier
+ *
+ * @param {Object} data - Object derived from `/sale` endpoint
+ * @param {BrowserWindow} window - Instance of BrowserWindow in which to use to send IPC messages
+ */
 Sale.notify = function(data, window) {
   const SN = Notification.notify({
     title: "ChronoGG Daily Deal",
@@ -50,6 +69,12 @@ Sale.notify = function(data, window) {
   });
 };
 
+/**
+ * Service runner for sale
+ *
+ * @param {BrowserWindow} window - BrowserWindow in which to use to send IPC messages
+ * @returns {Promise<any>}
+ */
 Sale.run = function(window) {
   return new Promise((resolve, reject) => {
     Chrono.getSale().then(Current => {

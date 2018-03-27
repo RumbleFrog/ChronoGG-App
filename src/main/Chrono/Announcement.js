@@ -28,7 +28,7 @@ Announcement.fetch = function() {
 /**
  * Compares current announcements with storage in memory, resolving the non-conflicting announcements
  *
- * @param announcements Raw current announcements
+ * @param announcements - Raw current announcements
  * @returns {Promise<any>} Resolves w/ non-conflicting announcements, otherwise reject with storage error
  */
 Announcement.intersect = function(announcements) {
@@ -49,8 +49,8 @@ Announcement.intersect = function(announcements) {
 /**
  * Storage helper for mapping announcement to their `_ids` and storing it
  *
- * @param announcements The unmodified array of announcements regardless of intersection result
- * @returns {Promise<any>} Resolves(null) w/o error, rejects with the error otherwise
+ * @param announcements - The unmodified array of announcements regardless of intersection result
+ * @returns {Promise<any>} Resolves({void}) w/o error, rejects with the error otherwise
  */
 Announcement.store = function(announcements) {
   return new Promise((resolve, reject) => {
@@ -70,8 +70,7 @@ Announcement.store = function(announcements) {
 /**
  * Fires corresponding platform notifier
  *
- * @param announcements Announcements passed through intersect
- * @noreturn
+ * @param {Object[]} announcements - Announcements passed through intersect
  */
 Announcement.notify = function(announcements) {
   announcements.forEach(a => {
