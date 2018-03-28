@@ -7,9 +7,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8b443a30606e4a4bbcae1f0c235de4b6)](https://app.codacy.com/app/RumbleFrog/ChronoGG-App?utm_source=github.com&utm_medium=referral&utm_content=RumbleFrog/ChronoGG-App)
 [![Known Vulnerabilities](https://snyk.io/test/github/rumblefrog/chronogg-app/badge.svg?targetFile=package.json)](https://snyk.io/test/github/rumblefrog/chronogg-app?targetFile=package.json)
 
-![GitHub release](https://img.shields.io/github/release/RumbleFrog/ChronoGG-App.svg)
 ![Github All Releases](https://img.shields.io/github/downloads/RumbleFrog/ChronoGG-App/total.svg)
 ![GitHub issues](https://img.shields.io/github/issues/RumbleFrog/ChronoGG-App.svg)
+![GitHub release](https://img.shields.io/github/release/RumbleFrog/ChronoGG-App.svg)
+![Github Releases](https://img.shields.io/github/downloads/RumbleFrog/ChronoGG-App/latest/total.svg)
 
 # Disclaimer
 
