@@ -8,12 +8,18 @@ import Chrono from "./Chrono";
 
 const Restock = {};
 
-Restock.store = function(data) {
+/**
+ * Storage helper saving arrays of game `_id` properties
+ *
+ * @param {String[]} ids - Array of game `_id` property
+ * @returns {Promise<any>}
+ */
+Restock.store = function(ids) {
   return new Promise((resolve, reject) => {
     Storage.set(
       "shop",
       {
-        ids: data
+        ids: ids
       },
       err => {
         if (err) reject(err);
@@ -23,6 +29,12 @@ Restock.store = function(data) {
   });
 };
 
+/**
+ * Compares current announcements with storage in memory, resolving w/ unprecedented games
+ *
+ * @param {String[]} ids - Array of game `_id` property
+ * @returns {Promise<any>} Resolves w/ unprecedented games, otherwise reject with storage error
+ */
 Restock.intersect = function(ids) {
   return new Promise((resolve, reject) => {
     Storage.get("shop", (err, data) => {
@@ -38,6 +50,11 @@ Restock.intersect = function(ids) {
   });
 };
 
+/**
+ * Fires corresponding platform notifier
+ *
+ * @param {String} games - Concatenated list of games, delimited by `\n`
+ */
 Restock.notify = function(games) {
   const RN = Notification.notify({
     title: "ChronoGG Shop Restock",
@@ -52,6 +69,11 @@ Restock.notify = function(games) {
   });
 };
 
+/**
+ * Service runner for restock
+ *
+ * @returns {Promise<any>} Resolves(null) when complete & rejects when fail to fetch from Storage
+ */
 Restock.run = function() {
   return new Promise((resolve, reject) => {
     Chrono.getShop().then(shop => {

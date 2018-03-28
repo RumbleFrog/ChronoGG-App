@@ -73,7 +73,7 @@ Sale.notify = function(data, window) {
  * Service runner for sale
  *
  * @param {BrowserWindow} window - BrowserWindow in which to use to send IPC messages
- * @returns {Promise<any>}
+ * @returns {Promise<any>} Resolves(null) when complete & rejects when fail to fetch from Storage
  */
 Sale.run = function(window) {
   return new Promise((resolve, reject) => {

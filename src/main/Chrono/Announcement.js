@@ -26,7 +26,7 @@ Announcement.fetch = function() {
 };
 
 /**
- * Compares current announcements with storage in memory, resolving the non-conflicting announcements
+ * Compares current announcements with storage in memory, resolving w/ non-conflicting announcements
  *
  * @param announcements - Raw current announcements
  * @returns {Promise<any>} Resolves w/ non-conflicting announcements, otherwise reject with storage error
